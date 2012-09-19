@@ -24,7 +24,7 @@ md5sums=('8c784baec3054cdb1bb4bfa792c87812'
          '033ce263f0570ec8603fc39e7ab3e743'
          '50757b50ae6178e3a504ed9f10424394'
          'f345dc7804e77e622d66402909876922'
-         '2fd299eb17fcaa6f04f5a2674e787550')
+         'b2e9429a23ad49a09ae680d62e00f377')
 build() {
   cd ${srcdir}/$pkgname-$pkgver
 
@@ -53,7 +53,7 @@ package() {
   install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/$pkgname/LICENSE
 
  #systemd
-  install -D -m644 ${srcdir}/$pkgname.socket ${pkgdir}/lib/systemd/system/$pkgname.socket
-  install -D -m644 ${srcdir}/$pkgname@.service ${pkgdir}/lib/systemd/system/$pkgname@.service
-  install -D -m644 ${srcdir}/dropbearkey.service ${pkgdir}/lib/systemd/system/dropbearkey.service
+  install -D -m644 ${srcdir}/$pkgname.socket ${pkgdir}/usr/lib/systemd/system/$pkgname.socket
+  install -D -m644 ${srcdir}/$pkgname@.service ${pkgdir}/usr/lib/systemd/system/$pkgname@.service
+  install -D -m644 ${srcdir}/dropbearkey.service ${pkgdir}/usr/lib/systemd/system/dropbearkey.service
 }
