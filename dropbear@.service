@@ -1,9 +1,8 @@
 [Unit]
 Description=SSH Per-Connection Server
-Requires=dropbearkey.service
-After=syslog.target dropbearkey.service
+Wants=dropbear-keygen.service
 
 [Service]
-ExecStart=-/usr/sbin/dropbear -i -r /etc/dropbear/dropbear_rsa_host_key -p 22
+ExecStart=-/usr/sbin/dropbear -i
 ExecReload=/bin/kill -HUP $MAINPID
 StandardInput=socket
