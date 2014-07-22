@@ -1,5 +1,5 @@
 # Maintainer: Simon Perry <aur [at] sanxion [dot] net>
-# Contributor:  Bartlomiej Piotrowski <nospam@bpiotrowski.pl>
+# Contributor: Bartlomiej Piotrowski <nospam@bpiotrowski.pl>
 # Contributor: Jaroslav Lichtblau <dragonlord@aur.archlinux.org>
 # Contributor: Jason Pierce <`echo 'moc tod liamg ta nosaj tod ecreip' | rev`>
 # Contributor: Jeremy Cowgar <jeremy@cowgar.com>
@@ -7,7 +7,7 @@
 # Contributor: Christopher Larson <kergoth@gmail.com>
 
 pkgname=dropbear
-pkgver=2013.56
+pkgver=2014.63
 pkgrel=1
 pkgdesc="Lightweight replacement for sshd"
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ source=(http://matt.ucc.asn.au/$pkgname/releases/$pkgname-$pkgver.tar.bz2
         $pkgname.service
         $pkgname@.service
         $pkgname.socket)
-sha256sums=('bd01d5759948d78dfac7a929f11119f1174c03e1a09fa7fd197f9e9649f27251'
+sha256sums=('595992de432ba586a0e7e191bbb1ad587727678bb3e345b018c395b8c55b57ae'
             'd3b1556fd4313ae588604d93c18623b7c26a0086d9a89b895ffc6f9c328fc268'
             'af217607ce6529a127fc07e8f27cb6412290271883a60b4cd152d7b504c6ecf9'
             'acf99d4bffd4ef715f27f1167d12efea77ca660ab32ae4065bc98c625a2fecc9'
@@ -37,20 +37,15 @@ build() {
 package() {
   cd ${srcdir}/$pkgname-$pkgver
 
-  make prefix=${pkgdir}/usr install
+  DESTDIR=${pkgdir} make install
 
- #man pages
-  install -D -m644 dbclient.1 ${pkgdir}/usr/share/man/man1/dbclient.1
-  install -D -m644 $pkgname.8 ${pkgdir}/usr/share/man/man8/$pkgname.8
-  install -D -m644 dropbearkey.8 ${pkgdir}/usr/share/man/man8/dropbearkey.8
-
- #configuration files
+  # Configuration files
   install -d ${pkgdir}/etc/$pkgname
   install -D -m644 ${srcdir}/$pkgname-keygen.service ${pkgdir}/usr/lib/systemd/system/$pkgname-keygen.service
   install -D -m644 ${srcdir}/$pkgname.service ${pkgdir}/usr/lib/systemd/system/$pkgname.service
   install -D -m644 ${srcdir}/$pkgname@.service ${pkgdir}/usr/lib/systemd/system/$pkgname@.service
   install -D -m644 ${srcdir}/$pkgname.socket ${pkgdir}/usr/lib/systemd/system/$pkgname.socket
 
- #license file
+  # License file
   install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/$pkgname/LICENSE
 }
